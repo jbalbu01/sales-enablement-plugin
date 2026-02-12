@@ -40,6 +40,11 @@ A Claude plugin that turns your sales enablement into a **living, learning syste
 | Siloed by function | Cross-GTM (sales, marketing, CS, partnerships) |
 | Point-in-time snapshots | Compounding intelligence over quarters |
 
+### See It in Action
+
+![Deal Review Demo](docs/deal-review-demo.png)
+*`/deal-review` generates a MEDDIC scorecard, risk analysis, and win plan from a deal description.*
+
 ---
 
 ## Installation
