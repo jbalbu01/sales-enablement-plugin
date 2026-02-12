@@ -4,7 +4,7 @@
 
 **A compounding GTM intelligence engine that learns from every deal and gets smarter over time.**
 
-[![Version](https://img.shields.io/badge/version-2.4.0-blue.svg)](https://github.com/jbalbu01/sales-enablement-plugin)
+[![Version](https://img.shields.io/badge/version-2.4.0-blue.svg)](https://github.com/jbalbu01/sales-enablement-plugin/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Skills](https://img.shields.io/badge/skills-18-orange.svg)](#skills)
 [![MCP Tools](https://img.shields.io/badge/MCP_tools-16-purple.svg)](#mcp-integrations)
@@ -46,13 +46,16 @@ A Claude plugin that turns your sales enablement into a **living, learning syste
 
 ### As a Claude Plugin (Recommended)
 
-Download the latest release zip and upload it as a custom plugin in Claude Desktop or Cowork.
+1. Download the [latest release](https://github.com/jbalbu01/sales-enablement-plugin/releases/latest) zip
+2. Open Claude Desktop or Cowork → Settings → Plugins
+3. Click **Upload Custom Plugin** and select the zip
+4. The plugin activates immediately — no configuration needed
 
 ### From Source
 
 ```bash
 git clone https://github.com/jbalbu01/sales-enablement-plugin.git
-cd sales-enablement-plugin/sales-enablement-v2.1
+cd sales-enablement-plugin
 
 # Set up the bundled MCP server (optional — only if you use Gong/ZoomInfo/Clay/LinkedIn)
 cd mcp-server
@@ -215,16 +218,16 @@ memory/
 ## Architecture
 
 ```
-sales-enablement-v2.1/
-├── .mcp.json                  # Pre-configured MCP servers (10 total)
-├── .claude-plugin/plugin.json # Plugin manifest (v2.4.0)
-├── CONNECTORS.md              # Full connector reference
-├── mcp-server/                # Bundled Sales Intelligence MCP server
-│   ├── src/                   # TypeScript source (16 tools)
-│   └── dist/                  # Pre-compiled JS (ready to run)
-├── skills/                    # 18 specialized skills
-├── commands/                  # 7 slash commands
-└── shortcuts/                 # 4 scheduled automations
+sales-enablement-plugin/
+├── .claude-plugin/plugin.json  # Plugin manifest
+├── .mcp.json                   # Pre-configured MCP servers (10 total)
+├── CONNECTORS.md               # Full connector reference
+├── mcp-server/                 # Bundled Sales Intelligence MCP server
+│   ├── src/                    # TypeScript source (16 tools)
+│   └── dist/                   # Pre-compiled JS (ready to run)
+├── skills/                     # 18 specialized skills
+├── commands/                   # 7 slash commands
+└── shortcuts/                  # 4 scheduled automations
 ```
 
 ---
@@ -252,7 +255,7 @@ Monday morning:
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request.
+Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines, or open an [issue](https://github.com/jbalbu01/sales-enablement-plugin/issues).
 
 ## Author
 
