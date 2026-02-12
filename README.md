@@ -8,11 +8,48 @@ Not a collection of templates. An enablement **infrastructure** that compounds.
 
 Traditional enablement plugins generate content. This one **learns from outcomes** and **heals itself**:
 
+<<<<<<< HEAD
 - **Memory Layer:** Every skill reads from and writes to a persistent knowledge base. Competitive intel, deal patterns, ICP data, and team profiles compound over time.
 - **Self-Healing Content:** Content freshness is scored continuously. When a competitor launches a new feature, the system flags every battle card, playbook, and talk track that needs updating — automatically.
 - **Personalization:** Materials adapt to each rep's experience level, skill gaps, and learning style. A new hire gets scaffolding; a veteran gets targeted nudges.
 - **Cross-GTM:** Covers sales, marketing, CS, partnerships, and RevOps — because deals don't live in one function.
 - **Scheduled Automations:** Weekly competitive scans, pipeline digests, and content audits run on autopilot.
+=======
+---
+
+</div>
+
+## What Is This?
+
+A Claude plugin that turns your sales enablement into a **living, learning system**. Unlike static template generators, this plugin builds intelligence over time — tracking competitive shifts, learning from deal outcomes, and adapting content to each rep's skill level automatically.
+
+### Key Capabilities
+
+- **18 specialized skills** covering sales, marketing, CS, partnerships, and RevOps
+- **7 slash commands** for instant workflow execution
+- **4 scheduled automations** for competitive scans, pipeline digests, and content audits
+- **16 custom MCP tools** for deep integration with Gong, ZoomInfo, Clay, and LinkedIn Sales Navigator
+- **9 pre-configured remote connectors** for HubSpot, Slack, MS365, Notion, and more
+- **Persistent memory layer** that compounds knowledge across every interaction
+- **Self-healing content system** that detects stale assets and triggers refresh workflows
+
+### How It's Different
+
+| Traditional Enablement | This Plugin |
+|---|---|
+| Static templates | Learns from deal outcomes |
+| One-size-fits-all | Adapts to each rep's skill level |
+| Manual content updates | Self-healing freshness monitoring |
+| Siloed by function | Cross-GTM (sales, marketing, CS, partnerships) |
+| Point-in-time snapshots | Compounding intelligence over quarters |
+
+### See It in Action
+
+![Deal Review Demo](docs/deal-review-demo.png)
+*`/deal-review` generates a MEDDIC scorecard, risk analysis, and win plan from a deal description.*
+
+---
+>>>>>>> d504eded7c0c4418491c6aa1b4b94ecc00bd2520
 
 ## Installation
 
