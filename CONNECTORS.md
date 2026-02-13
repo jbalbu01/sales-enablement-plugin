@@ -218,7 +218,7 @@ These tools come from the **Sales Intelligence MCP Server** — a companion MCP 
 
 **Skills that use Clay:** buyer-persona, proposal-builder, draft-outreach, account-research
 
-#### LinkedIn Sales Navigator (Prospect Research)
+#### LinkedIn (Prospect Research)
 
 | Operation | Tool Function | Key Parameters |
 |-----------|---------------|----------------|

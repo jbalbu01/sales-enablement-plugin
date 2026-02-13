@@ -1,7 +1,7 @@
 {
   "name": "sales-enablement",
   "version": "2.4.0",
-  "description": "A compounding GTM enablement engine with full MCP integration across all 21 skills, bundled with a custom Sales Intelligence MCP server (16 tools for Gong, ZoomInfo, Clay, LinkedIn Sales Navigator). Pre-configured .mcp.json includes 9 remote connectors (HubSpot, Slack, MS365, Notion, Fireflies, Clay, ZoomInfo, Atlassian, Close) plus the local Sales Intelligence server. Every skill auto-detects tools and pulls data before asking. Learns from every deal and gets smarter over time.",
+  "description": "A compounding GTM enablement engine with full MCP integration across all 21 skills, bundled with a custom Sales Intelligence MCP server (16 tools for Gong, ZoomInfo, Clay, LinkedIn). Pre-configured .mcp.json includes 9 remote connectors (HubSpot, Slack, MS365, Notion, Fireflies, Clay, ZoomInfo, Atlassian, Close) plus the local Sales Intelligence server. Every skill auto-detects tools and pulls data before asking. Learns from every deal and gets smarter over time.",
   "author": {
     "name": "Jose Balbuena"
   }

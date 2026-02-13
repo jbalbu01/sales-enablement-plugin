@@ -1,75 +1,61 @@
 # Sales Intelligence MCP Server
 
-A unified MCP (Model Context Protocol) server that gives Claude access to four sales intelligence platforms through 16 tools:
+Gives Claude access to your sales tools — Gong, ZoomInfo, Clay, and LinkedIn — so you can research prospects, pull call transcripts, and enrich leads right from Claude.
 
-| Service | Tools | What It Does |
-|---------|-------|-------------|
-| **Gong** | 5 | Search calls, pull transcripts, get call analytics, find calls by participant, aggregate stats |
-| **ZoomInfo** | 4 | Search companies, search contacts, get org charts, get tech stacks |
-| **Clay** | 3 | Enrich person data, enrich company data, trigger webhook-based enrichment tables |
-| **LinkedIn Sales Navigator** | 3 | Search leads, get profiles, search companies |
-| **Status** | 1 | Check which services are connected |
+## Quick Install (1 command)
 
-## Setup
-
-### 1. Install Dependencies
+Open Terminal and run:
 
 ```bash
+bash /path/to/mcp-server/install.sh
+```
+
+**That's it.** The script will:
+- Install the server to `~/sales-intelligence-mcp`
+- Find your Claude Desktop config automatically
+- Ask for your API keys (skip any you don't have)
+- Add everything to Claude's config for you
+
+Then just **restart Claude Desktop** and you're ready.
+
+---
+
+## Manual Setup (if you prefer)
+
+### Step 1: Install & Build
+
+```bash
+cd /path/to/mcp-server
 npm install
 npm run build
 ```
 
-### 2. Configure API Keys
+### Step 2: Find Your Claude Config File
 
-Set environment variables for the services you want to use. You only need keys for the services you plan to use — unconfigured services will return helpful setup messages.
+The config file is at:
 
+| OS | Location |
+|----|----------|
+| **Mac** | `~/Library/Application Support/Claude/claude_desktop_config.json` |
+| **Linux** | `~/.config/Claude/claude_desktop_config.json` |
+| **Windows** | `%APPDATA%\Claude\claude_desktop_config.json` |
+
+**Mac shortcut** — open it in TextEdit:
 ```bash
-# Gong (Basic Auth)
-export GONG_ACCESS_KEY="your-access-key"
-export GONG_ACCESS_KEY_SECRET="your-access-key-secret"
-
-# ZoomInfo (JWT Auth)
-export ZOOMINFO_CLIENT_ID="your-client-id"
-export ZOOMINFO_PRIVATE_KEY="your-private-key"
-
-# Clay (API Key)
-export CLAY_API_KEY="your-api-key"
-
-# LinkedIn Sales Navigator (OAuth Bearer Token — requires SNAP partnership)
-export LINKEDIN_ACCESS_TOKEN="your-oauth-token"
+open -a TextEdit ~/Library/Application\ Support/Claude/claude_desktop_config.json
 ```
 
-### 3. Connect to Claude
+### Step 3: Add to Config
 
-Add to your Claude Desktop config (`claude_desktop_config.json`):
+Add `"sales-intelligence"` inside the `"mcpServers"` section. If you already have other servers (like Docker), just add it alongside them with a comma:
 
 ```json
 {
   "mcpServers": {
+    "YOUR_EXISTING_SERVER": { "..." : "..." },
     "sales-intelligence": {
       "command": "node",
-      "args": ["/path/to/sales-intelligence-mcp-server/dist/index.js"],
-      "env": {
-        "GONG_ACCESS_KEY": "your-key",
-        "GONG_ACCESS_KEY_SECRET": "your-secret",
-        "ZOOMINFO_CLIENT_ID": "your-id",
-        "ZOOMINFO_PRIVATE_KEY": "your-key",
-        "CLAY_API_KEY": "your-key",
-        "LINKEDIN_ACCESS_TOKEN": "your-token"
-      }
-    }
-  }
-}
-```
-
-Or for Claude Code, add to `.mcp.json`:
-
-```json
-{
-  "mcpServers": {
-    "sales-intelligence": {
-      "command": "node",
-      "args": ["./sales-intelligence-mcp-server/dist/index.js"],
+      "args": ["/Users/YOURNAME/sales-intelligence-mcp/dist/index.js"],
       "env": {
         "GONG_ACCESS_KEY": "",
         "GONG_ACCESS_KEY_SECRET": "",
@@ -83,76 +69,78 @@ Or for Claude Code, add to `.mcp.json`:
 }
 ```
 
-## Tool Reference
+**Important:** Replace `/Users/YOURNAME/` with your actual home folder path.
 
-### Gong Tools
+### Step 4: Add Your API Keys
 
-| Tool | Description |
-|------|-------------|
-| `gong_search_calls` | Search calls by date range with pagination |
-| `gong_get_transcript` | Get full timestamped transcript for a call |
-| `gong_get_call_details` | Get topics, trackers, action items, speaker stats |
-| `gong_search_calls_by_participant` | Find calls by participant email |
-| `gong_get_call_stats` | Aggregate stats: total calls, avg duration, top participants |
+Fill in the keys for whichever services you use. Leave the rest blank — they'll just show as "Not Configured" and you can add them later.
 
-### ZoomInfo Tools
+### Step 5: Restart Claude Desktop
 
-| Tool | Description |
-|------|-------------|
-| `zoominfo_search_company` | Search by name, domain, industry, size, revenue |
-| `zoominfo_search_contact` | Search by name, title, department, company, level |
-| `zoominfo_get_org_chart` | Get reporting hierarchy for a company |
-| `zoominfo_get_tech_stack` | Get technology stack for a company |
+Quit Claude completely and reopen it. Check Settings → Connectors — you should see "sales-intelligence" listed.
 
-### Clay Tools
-
-| Tool | Description |
-|------|-------------|
-| `clay_enrich_person` | Enrich person by email, LinkedIn URL, or name+company |
-| `clay_enrich_company` | Enrich company by domain or name |
-| `clay_trigger_enrichment` | Send data to a Clay webhook table for async enrichment |
-
-### LinkedIn Sales Navigator Tools
-
-| Tool | Description |
-|------|-------------|
-| `linkedin_search_leads` | Search leads by keywords, title, company, seniority, geo |
-| `linkedin_get_profile` | Get detailed profile by URL or member ID |
-| `linkedin_search_companies` | Search companies by name, industry, size, geo |
-
-### Utility
-
-| Tool | Description |
-|------|-------------|
-| `sales_intel_status` | Check which services are configured |
-
-## Architecture
-
-```
-src/
-├── index.ts              # Server entry point, registers all tools
-├── constants.ts          # API URLs, limits, enums
-├── types.ts              # TypeScript interfaces for all services
-├── services/
-│   ├── gong-client.ts    # Gong API client (Basic Auth)
-│   ├── zoominfo-client.ts # ZoomInfo API client (JWT)
-│   ├── clay-client.ts    # Clay API client (API Key + Webhooks)
-│   └── error-handler.ts  # Shared error handling and truncation
-└── tools/
-    ├── gong-tools.ts     # 5 Gong tools
-    ├── zoominfo-tools.ts # 4 ZoomInfo tools
-    ├── clay-tools.ts     # 3 Clay tools
-    └── linkedin-tools.ts # 3 LinkedIn tools
-```
+---
 
 ## Getting API Keys
 
-| Service | How to Get Keys |
+| Service | Where to Get It |
 |---------|----------------|
-| **Gong** | Settings → Integrations → API → Create Access Key |
-| **ZoomInfo** | Developer Portal → Create App → Get Client ID + Private Key |
-| **Clay** | Settings → API → Generate Key (Enterprise plan required for enrichment endpoints) |
-| **LinkedIn** | Requires SNAP partnership — apply at LinkedIn Developer Portal |
+| **Gong** | Gong → Settings → Integrations → API → Create Access Key |
+| **ZoomInfo** | ZoomInfo Developer Portal → Create App → Client ID + Private Key |
+| **Clay** | Clay → Settings → API → Generate Key |
+| **LinkedIn** | LinkedIn Developer Portal → Create App → OAuth 2.0 token (standard developer account works, no SNAP needed) |
+
+---
+
+## What You Can Do
+
+Once connected, just ask Claude things like:
+
+- *"Search for VPs of Engineering at SaaS companies in San Francisco"*
+- *"Pull the transcript from my last call with Acme Corp"*
+- *"Enrich this lead: jane@example.com"*
+- *"What's the tech stack at Stripe?"*
+- *"Check my sales intelligence status"* (to see which services are connected)
+
+### All 16 Tools
+
+| Service | Tool | What It Does |
+|---------|------|-------------|
+| Gong | `gong_search_calls` | Search calls by date range |
+| Gong | `gong_get_transcript` | Get full call transcript |
+| Gong | `gong_get_call_details` | Topics, trackers, action items |
+| Gong | `gong_search_calls_by_participant` | Find calls by person |
+| Gong | `gong_get_call_stats` | Call analytics & stats |
+| ZoomInfo | `zoominfo_search_company` | Company firmographics |
+| ZoomInfo | `zoominfo_search_contact` | Contact lookup |
+| ZoomInfo | `zoominfo_get_org_chart` | Org chart for a company |
+| ZoomInfo | `zoominfo_get_tech_stack` | Tech stack lookup |
+| Clay | `clay_enrich_person` | Person enrichment |
+| Clay | `clay_enrich_company` | Company enrichment |
+| Clay | `clay_trigger_enrichment` | Webhook enrichment |
+| LinkedIn | `linkedin_search_leads` | Search people on LinkedIn |
+| LinkedIn | `linkedin_get_profile` | Get a LinkedIn profile |
+| LinkedIn | `linkedin_search_companies` | Search companies on LinkedIn |
+| Utility | `sales_intel_status` | Check which services are connected |
+
+---
+
+## Troubleshooting
+
+**"Module not found" error?**
+→ Run `cd ~/sales-intelligence-mcp && npm install` then restart Claude.
+
+**Server doesn't show in Claude?**
+→ Make sure the path in your config points to the actual `dist/index.js` file. Test it: `node ~/sales-intelligence-mcp/dist/index.js`
+
+**LinkedIn returns 401?**
+→ Your token may have expired. Generate a new one from the LinkedIn Developer Portal. Standard tokens (no SNAP) work fine.
+
+**Services show ✗ in status?**
+→ The API key for that service is missing or empty. Add it to your Claude config and restart.
+
+**Config file not found?**
+→ On Mac, open Terminal and run: `ls ~/Library/Application\ Support/Claude/`
 
 ## License
 

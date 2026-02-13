@@ -6,7 +6,7 @@
  * - Gong: Call recordings, transcripts, analytics, and coaching data
  * - ZoomInfo: Company firmographics, contact data, org charts, tech stacks
  * - Clay: Person and company enrichment via data waterfalls
- * - LinkedIn Sales Navigator: Lead search, profiles, and company research
+ * - LinkedIn: Lead search, profiles, and company research (standard API, no SNAP required)
  *
  * Each service registers its tools independently — you only need API keys
  * for the services you want to use. Tools gracefully error with setup
@@ -88,7 +88,7 @@ Returns: Status of each service (configured/not configured) with required enviro
         envVars: ["CLAY_API_KEY"],
       },
       {
-        name: "LinkedIn Sales Navigator",
+        name: "LinkedIn",
         configured: isLinkedInConfigured(),
         tools: ["linkedin_search_leads", "linkedin_get_profile", "linkedin_search_companies"],
         envVars: ["LINKEDIN_ACCESS_TOKEN"],
