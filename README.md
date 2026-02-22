@@ -45,6 +45,59 @@ Then restart Claude Desktop. That's it.
 
 Every interaction reads from and writes to memory. The system learns your competitive landscape, deal patterns, ICP, and team strengths over time.
 
+## Example: Competitive Battle Cards
+
+Running `/competitive-pulse` or invoking the Battle Cards skill produces a full competitive matrix. Here's a real example output comparing against 5 competitors:
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    COMPETITIVE BATTLE CARDS                         │
+│                 Mantyl.ai vs Top 5 Competitors                     │
+├──────────────┬──────────┬──────────┬──────────┬─────────┬─────────┤
+│ Capability   │ Mantyl   │ Comp A   │ Comp B   │ Comp C  │ Comp D  │
+├──────────────┼──────────┼──────────┼──────────┼─────────┼─────────┤
+│ AI Agents    │ ★★★★★   │ ★★★☆☆   │ ★★★★☆   │ ★★☆☆☆  │ ★★★☆☆  │
+│ Integrations │ ★★★★★   │ ★★★★☆   │ ★★★☆☆   │ ★★★★☆  │ ★★☆☆☆  │
+│ Automation   │ ★★★★★   │ ★★★☆☆   │ ★★★★☆   │ ★★★☆☆  │ ★★★☆☆  │
+│ Analytics    │ ★★★★☆   │ ★★★★☆   │ ★★★☆☆   │ ★★★★★  │ ★★☆☆☆  │
+│ Ease of Use  │ ★★★★☆   │ ★★★☆☆   │ ★★★★★   │ ★★☆☆☆  │ ★★★★☆  │
+│ Pricing      │ ★★★★★   │ ★★☆☆☆   │ ★★★☆☆   │ ★★★☆☆  │ ★★★★☆  │
+└──────────────┴──────────┴──────────┴──────────┴─────────┴─────────┘
+
+Each competitor card includes:
+- Company overview and market position
+- Key strengths and weaknesses
+- Head-to-head feature comparison
+- Win themes and talk tracks
+- Common objections with responses
+- Recommended attack angles
+```
+
+## Example: Deal Review
+
+Running `/deal-review Acme Corp` produces a structured assessment:
+
+```
+Deal Health Score: 72/100
+
+Strengths:
+- Champion identified (VP Sales, strong internal advocate)
+- Technical validation complete, positive eval feedback
+- Timeline aligns with Q2 budget cycle
+
+Risks:
+- No access to economic buyer (CFO)
+- Competitor (Rival Inc) in final evaluation
+- Legal review not yet started — 3 week typical cycle
+
+Recommended Next Steps:
+1. Request champion intro to CFO before next meeting
+2. Prepare Rival Inc battlecard (see /competitive-pulse)
+3. Send ROI model tailored to their 340-rep team size
+
+Confidence: Commit (if CFO access secured by Feb 28)
+```
+
 ## What's Inside
 
 ### 18 Skills
@@ -143,32 +196,6 @@ Copy the settings template and customize:
   "default_qualification_framework": "MEDDIC",
   "default_discovery_framework": "SPIN"
 }
-```
-
-## Example Output
-
-**Input:** `/deal-review Acme Corp`
-
-**Output:**
-```
-Deal Health Score: 72/100
-
-Strengths:
-- Champion identified (VP Sales, strong internal advocate)
-- Technical validation complete, positive eval feedback
-- Timeline aligns with Q2 budget cycle
-
-Risks:
-- No access to economic buyer (CFO)
-- Competitor (Rival Inc) in final evaluation
-- Legal review not yet started — 3 week typical cycle
-
-Recommended Next Steps:
-1. Request champion intro to CFO before next meeting
-2. Prepare Rival Inc battlecard (see /competitive-pulse)
-3. Send ROI model tailored to their 340-rep team size
-
-Confidence: Commit (if CFO access secured by Feb 28)
 ```
 
 ## Project Structure
