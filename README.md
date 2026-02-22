@@ -16,6 +16,14 @@ cd mcp-server && npm install && npm run build
 
 Then restart Claude Desktop. That's it.
 
+## In Action
+
+![Sales Enablement Plugin](docs/sales-enablement-plugin.png)
+
+![Commands](docs/sales-enablement-commands.png)
+
+![Skills](docs/sales-enablement-skills.png)
+
 ## How It Works
 
 ```
@@ -47,6 +55,10 @@ Every interaction reads from and writes to memory. The system learns your compet
 
 ## Example: Competitive Battle Cards
 
+![Battle Cards Example 1](docs/sales-enablement-example-1.png)
+
+![Battle Cards Example 2](docs/sales-enablement-example-2.png)
+
 Running `/competitive-pulse` or invoking the Battle Cards skill produces a full competitive matrix. Here's a real example output comparing against 5 competitors:
 
 ```
@@ -74,6 +86,7 @@ Each competitor card includes:
 ```
 
 ## Example: Deal Review
+![Deal Review Demo](docs/deal-review-demo.png)
 
 Running `/deal-review Acme Corp` produces a structured assessment:
 
@@ -168,6 +181,8 @@ The plugin ships with a TypeScript MCP server providing direct access to four pl
 | **Utility** | sales_intel_status |
 
 ## Integrations
+
+![Connectors](docs/sales-enablement-connectors.png)
 
 Works standalone out of the box. Optionally connect any of these for richer context:
 
